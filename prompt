@@ -1,0 +1,27 @@
+I have a Maven project with JUnit 4 and Jenkins CI/CD already configured.
+
+Generate ONLY Java code (no explanation, no extra text).
+
+Output strictly in this format:
+
+1. App.java
+2. AppTest.java
+
+Requirements:
+
+* Use package: com.example
+* Use only JUnit 4 (org.junit.Test, org.junit.Assert)
+* Do NOT use JUnit 5
+* Do NOT modify pom.xml
+* Do NOT add dependencies
+* Keep logic simple (ArrayList or basic variable)
+* Include:
+
+  * add method
+  * remove method (if applicable)
+  * count/get method
+* Provide exactly 2 or 3 test cases
+* Code must compile and pass mvn clean install
+* Do NOT include explanations
+
+Scenario: <PASTE YOUR QUESTION HERE>
