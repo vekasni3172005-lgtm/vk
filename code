@@ -1,0 +1,78 @@
+CI/CD using Maven, GitHub, VS Code and Jenkins
+Step 1: Install Java (JDK)
+- Download and install JDK 11 or above
+- Set JAVA_HOME and add to PATH
+- Verify using: java -version
+Step 2: Install Maven
+- Download apache-maven zip
+- Extract to C:\apache-maven-3.9.14
+- Set MAVEN_HOME and add %MAVEN_HOME%\bin to PATH
+- Verify using: mvn -version
+Step 3: Create Maven Project
+Command:
+mvn archetype:generate
+GroupId: com.example
+ArtifactId: my-app
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+Step 4: Build Project
+Command:
+mvn clean install
+Step 5: Push Project to GitHub
+Commands:
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin <repo-url>
+git pull origin main --allow-unrelated-histories
+git push -u origin main
+Step 6: Modify Code
+Edit App.java and AppTest.java
+Step 7: Fix pom.xml (JUnit)
+Add dependency:
+<dependency>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<version>4.13.2</version>
+<scope>test</scope>
+</dependency>
+Step 8: Install Jenkins
+Open: http://localhost:8080
+Install plugins
+Step 9: Configure Maven in Jenkins
+Manage Jenkins → Tools
+Add Maven:
+Name: M3
+Path: C:\apache-maven-3.9.14
+Step 10: Create Pipeline
+New Item → Pipeline
+Name: my-app-pipeline
+Step 11: Pipeline Script
+pipeline {
+ agent any
+ tools { maven 'M3' }
+ stages {
+  stage('Clone') {
+   steps {
+    checkout([
+     $class: 'GitSCM',
+     branches: [[name: '*/main']],
+     userRemoteConfigs: [[url: '<repo-url>']]
+    ])
+   }
+  }
+  stage('Build') { steps { bat 'mvn clean install' } }
+  stage('Test') { steps { bat 'mvn test' } }
+ }
+}
+Step 12: Run Pipeline
+Click Build Now
+Check Console Output
+Result: BUILD SUCCESS
